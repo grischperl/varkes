@@ -1,5 +1,5 @@
 <edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
-    <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="3.0" m:MaxDataServiceVersion="3.0">
+    <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0" m:MaxDataServiceVersion="3.0">
         <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" Namespace="ODataDemo">
             <EntityType Name="Product">
                 <Key>
@@ -17,7 +17,7 @@
                 <NavigationProperty Name="ProductDetail" Relationship="ODataDemo.Product_ProductDetail_ProductDetail_Product" ToRole="ProductDetail_Product" FromRole="Product_ProductDetail"/>
             </EntityType>
             <EntityType Name="FeaturedProduct" BaseType="ODataDemo.Product">
-                <NavigationProperty Name="Advertisement" Relationship="ODataDemo.FeaturedProduct_Advertisement_Advertisement_FeaturedProduct" ToRole="Advertisement_FeaturedProduct" FromRole="FeaturedProduct_Advertisement"/>
+                
             </EntityType>
             <EntityType Name="ProductDetail">
                 <Key>
@@ -42,7 +42,6 @@
                 <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
                 <Property Name="Name" Type="Edm.String" m:FC_TargetPath="SyndicationTitle" m:FC_ContentKind="text" m:FC_KeepInContent="true"/>
                 <Property Name="Address" Type="ODataDemo.Address"/>
-                <Property Name="Location" Type="Edm.GeographyPoint" SRID="Variable"/>
                 <Property Name="Concurrency" Type="Edm.Int32" ConcurrencyMode="Fixed" Nullable="false"/>
                 <NavigationProperty Name="Products" Relationship="ODataDemo.Product_Supplier_Supplier_Products" ToRole="Product_Supplier" FromRole="Supplier_Products"/>
             </EntityType>
@@ -78,7 +77,6 @@
                 <Property Name="Gender" Type="Edm.Boolean" Nullable="false"/>
                 <Property Name="Phone" Type="Edm.String"/>
                 <Property Name="Address" Type="ODataDemo.Address"/>
-                <Property Name="Photo" Type="Edm.Stream" Nullable="false"/>
                 <NavigationProperty Name="Person" Relationship="ODataDemo.Person_PersonDetail_PersonDetail_Person" ToRole="Person_PersonDetail" FromRole="PersonDetail_Person"/>
             </EntityType>
             <EntityType Name="Advertisement" m:HasStream="true">
@@ -88,7 +86,6 @@
                 <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="Name" Type="Edm.String"/>
                 <Property Name="AirDate" Type="Edm.DateTime" Nullable="false"/>
-                <NavigationProperty Name="FeaturedProduct" Relationship="ODataDemo.FeaturedProduct_Advertisement_Advertisement_FeaturedProduct" ToRole="FeaturedProduct_Advertisement" FromRole="Advertisement_FeaturedProduct"/>
             </EntityType>
             <Association Name="Product_Categories_Category_Products">
                 <End Type="ODataDemo.Category" Role="Category_Products" Multiplicity="*"/>
@@ -101,10 +98,6 @@
             <Association Name="Product_ProductDetail_ProductDetail_Product">
                 <End Type="ODataDemo.ProductDetail" Role="ProductDetail_Product" Multiplicity="0..1"/>
                 <End Type="ODataDemo.Product" Role="Product_ProductDetail" Multiplicity="0..1"/>
-            </Association>
-            <Association Name="FeaturedProduct_Advertisement_Advertisement_FeaturedProduct">
-                <End Type="ODataDemo.Advertisement" Role="Advertisement_FeaturedProduct" Multiplicity="0..1"/>
-                <End Type="ODataDemo.FeaturedProduct" Role="FeaturedProduct_Advertisement" Multiplicity="0..1"/>
             </Association>
             <Association Name="Person_PersonDetail_PersonDetail_Person">
                 <End Type="ODataDemo.PersonDetail" Role="PersonDetail_Person" Multiplicity="0..1"/>
@@ -121,10 +114,6 @@
                 <FunctionImport Name="GetProductsByRating" ReturnType="Collection(ODataDemo.Product)" EntitySet="Products" m:HttpMethod="GET">
                     <Parameter Name="rating" Type="Edm.Int16" Nullable="false"/>
                 </FunctionImport>
-                <AssociationSet Name="Products_Advertisement_Advertisements" Association="ODataDemo.FeaturedProduct_Advertisement_Advertisement_FeaturedProduct">
-                    <End Role="FeaturedProduct_Advertisement" EntitySet="Products"/>
-                    <End Role="Advertisement_FeaturedProduct" EntitySet="Advertisements"/>
-                </AssociationSet>
                 <AssociationSet Name="Products_Categories_Categories" Association="ODataDemo.Product_Categories_Category_Products">
                     <End Role="Product_Categories" EntitySet="Products"/>
                     <End Role="Category_Products" EntitySet="Categories"/>

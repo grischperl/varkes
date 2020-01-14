@@ -122,7 +122,7 @@ describe('test app', function () {
             describe('GET Advertisements via odata', function () {
                 it('should return response 200', function (done) {
                     request(app)
-                        .get('/service/odata/service.svc/Advertisements')
+                        .get('/service/odata/service.svc/Advertisement')
                         .set('Accept', 'application/json')
                         .expect('Content-Type', 'application/json; charset=utf-8')
                         .expect(200, done)
@@ -132,7 +132,7 @@ describe('test app', function () {
             describe('GET Summary_of_Sales_by_Years via odata', function () {
                 it('should return response 200', function (done) {
                     request(app)
-                        .get('/northwind/odata/northwind.svc/Summary_of_Sales_by_Years')
+                        .get('/northwind/odata/northwind.svc/Summary_of_Sales_by_Year')
                         .set('Accept', 'application/json')
                         .expect('Content-Type', 'application/json; charset=utf-8')
                         .expect(200, done)
