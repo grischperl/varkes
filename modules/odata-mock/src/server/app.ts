@@ -28,7 +28,7 @@ export async function init(config: config.Config): Promise<any> {
   }
 
   let csn = await cds.load(path.resolve(DIR_NAME, CDS_FILE))
-  await cds.deploy(csn).to('sqlite::memory:', { primary: true })
+  await cds.deploy(csn).to('sqlite::memory:')
   await cds.serve('all').from(csn).in(app)
   return app
 }
